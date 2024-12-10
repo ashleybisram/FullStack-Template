@@ -2,12 +2,34 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
+// allows parsing of json responses
 app.use(express.json());
 
+// importing a router
+const userRouter = require('./routes/users.js')
+app.use('/users', userRouter)
+
+// CREATE
 app.post('/', (req, res)=>{
     const {name} = req.body;
     
-    res.send(`Welcome ${name}`);
+    res.status(201).json({message: `Welcome ${name}`});
+})
+
+// READ
+app.get('/', (req, res) => {
+    console.log('here')
+    res.status(200).json({message:'GET request ran auccessfully.'});
+})
+
+// UPDATE
+app.put('/update', (res, req) => {
+
+})
+
+// DELETE
+app.delete('/delete', (res, req) => {
+
 })
 
 app.listen(PORT, (error) =>{
